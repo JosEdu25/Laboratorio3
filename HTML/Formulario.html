@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de moneda</title>
+</head>
+<body>
+    <h1>Haz tu cambio de moneda</h1>
+    <form id="casaDeCambioForm">
+        <label for="monedaOriginal">Moneda Original:</label>
+        <select id="monedaOriginal" name="monedaOriginal">
+            <option value="dolares">Dólares</option>
+            <option value="soles">Soles</option>
+            <option value="euros">Euros</option>
+        </select>
+        <label for="monedaFinal">Moneda de Cambio:</label>
+        <select id="monedaFinal" name="monedaFinal">
+            <option value="dolares">Dólares</option>
+            <option value="soles">Soles</option>
+            <option value="euros">Euros</option>
+        </select>
+        <label for="cantidad">Monto:</label>
+        <input type="number" id="cantidad" name="cantidad" step="0.01" placeholder="Ingrese el monto">
+        <button type="button" id="calcular">Calcular</button>
+    </form>
+    <script>
+        document.getElementById("calcular").addEventListener("click", function() {
+            const monedaOrigen = document.getElementById("monedaOriginal").value;
+            const monedaDestino = document.getElementById("monedaFinal").value;
+            const cantidad = parseFloat(document.getElementById("cantidad").value);
+            
+            let tasaCambio = 1.0; // Tasa de cambio ficticia
+            if (monedaOrigen === "soles" && monedaDestino === "dolares") {
+                tasaCambio = 0.28; // Cambio de soles a dólares
+            } else if (monedaOrigen === "dolares" && monedaDestino === "soles") {
+                tasaCambio = 3.57; // Cambio de dólares a soles
+            } else if (monedaOrigen === "euros" && monedaDestino === "dolares") {
+                tasaCambio = 1.18; // Cambio de euros a dólares
+            } else if (monedaOrigen === "dolares" && monedaDestino === "euros") {
+                tasaCambio = 0.85; // Cambio de dólares a euros
+            } else if (monedaOrigen === "soles" && monedaDestino === "euros") {
+                tasaCambio = 0.24; // Cambio de soles a euros
+            } else if (monedaOrigen === "euros" && monedaDestino === "soles") {
+                tasaCambio = 4.17; // Cambio de euros a soles 
+            }
+            const total = cantidad * tasaCambio;
+            alert(`Total a recibir: ${total.toFixed(2)} ${monedaDestino}`);
+        });
+    </script>
+</body>
+</html>
